@@ -62,6 +62,7 @@ class UsersController {
                 mensaje: `El usuario -${voEmail.value()}- ha sido registrado correctamente`,
             });
         } catch (error) {
+            console.log(error);
             next(error);
         }
     }
