@@ -1,0 +1,31 @@
+{
+  "name": "technical-challenge-with-serverless",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "dependencies": {
+    "aws-sdk": "^2.814.0",
+    "axios": "^0.21.0",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "serverless-http": "^2.6.0",
+    "zxcvbn": "^4.4.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "serverless-offline": "^6.8.0",
+    "serverless-plugin-include-dependencies": "^4.1.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "serverless",
+    "express",
+    "swapi",
+    "aws"
+  ],
+  "author": "jldamians <jlds161089@gmail.com>",
+  "license": "ISC"
+}

@@ -1,0 +1,86 @@
+service: technical-challenge-with-serverless
+
+custom:
+  tableName: 'users-table-${self:provider.stage}'
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - { "Fn::GetAtt": ["UsersDynamoDBTable", "Arn" ] }
+  environment:
+    USERS_TABLE: ${self:custom.tableName}
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-include-dependencies
+package:
+  exclude:
+    - node_modules/**
+
+functions:
+  greet:
+    handler: handler.greet
+    events:
+      - http:
+          path: greet
+          method: get
+          cors: true
+  app:
+    handler: server.handler
+    events:
+      - http:
+          path: /
+          method: ANY
+      - http:
+          path: /{proxy+}
+          method: ANY
+  getUser:
+    handler: server.handler
+    events:
+      - http:
+          path: /users/{proxy+}
+          method: get
+          cors: true
+  postUser:
+    handler: server.handler
+    events:
+      - http:
+          path: users
+          method: post
+          cors: true
+  getVehicle:
+    handler: server.handler
+    events:
+      - http:
+          path: /vehicles/{proxy+}
+          method: get
+          cors: true
+resources:
+  Resources:
+    UsersDynamoDBTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.tableName}
