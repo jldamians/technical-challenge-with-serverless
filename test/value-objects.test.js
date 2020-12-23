@@ -25,6 +25,20 @@ describe('Probando el "value object" de contraseña', () => {
             UserPassword('+-*123456+-*');
         });
     });
+    it('La contraseña real NO coincide con la cifrada', () => {        
+        const encryptedPassword = '$2a$10$J1g6j2F1jI.NgwAo9WOVneSMi6ZIJdzntj7pO83G9Kk9q.rTCCiue';
+        const decryptedPassword = '+-*incorrect+-*';
+        const voPassword = UserPassword(encryptedPassword);
+        const checking = voPassword.compare(decryptedPassword);
+        assert.isFalse(checking);
+    });
+    it('La contraseña real SI coincide con la cifrada', () => {        
+        const encryptedPassword = '$2a$10$J1g6j2F1jI.NgwAo9WOVneSMi6ZIJdzntj7pO83G9Kk9q.rTCCiue';
+        const decryptedPassword = '+-*123456+-*';
+        const voPassword = UserPassword(encryptedPassword);
+        const checking = voPassword.compare(decryptedPassword);
+        assert.isTrue(checking);
+    });
 });
 
 describe('Probando el "value object" de correo electrónico', () => {
