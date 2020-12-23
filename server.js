@@ -17,3 +17,4 @@ app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
 
 module.exports.handler = serverless(app);
+module.exports.app = app;

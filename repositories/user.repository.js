@@ -3,7 +3,7 @@
 const { database } = require("../bootstrap");
 const { User, UserNames, UserEmail, UserPassword, UserFacebook } = require("../domain/user");
 
-const USERS_TABLE = process.env.USERS_TABLE;
+const USERS_TABLE = process.env.USERS_TABLE || 'users-table-dev';
 
 const respository = {
     /**
