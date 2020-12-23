@@ -24,7 +24,7 @@ class UsersController {
             const user = await finder.search(voEmail);
 
             if (!user) {
-                return next(new UserNotFound(email));
+                throw new UserNotFound(voEmail.value());
             }
             
             res.status(200).json({
@@ -49,9 +49,7 @@ class UsersController {
             const user = await finder.search(voEmail);
 
             if (user) {
-                return next(
-                    new EmailAlreadyRegistered(voEmail.value())
-                );
+                throw new EmailAlreadyRegistered(voEmail.value());
             }
 
             await creator.create(
@@ -62,7 +60,6 @@ class UsersController {
                 mensaje: `El usuario -${voEmail.value()}- ha sido registrado correctamente`,
             });
         } catch (error) {
-            console.log(error);
             next(error);
         }
     }

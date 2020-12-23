@@ -14,7 +14,7 @@ class VehiclesController {
             const vehicle = await finder.search(id);
 
             if (!vehicle) {
-                return next(new VehicleNotFound(id));
+                throw new VehicleNotFound(id);
             }
             
             res.status(200).json({

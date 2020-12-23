@@ -35,11 +35,11 @@ module.exports = async (req, res, next) => {
         const user = await finder.search(voEmail);
 
         if (!user) {
-            return next(new WrongCredentials());
+            throw new WrongCredentials();
         }
 
         if (!user.password.compare(password)) {
-            return next(new WrongCredentials());
+            throw new WrongCredentials();
         }
 
         next();
