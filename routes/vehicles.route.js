@@ -1,11 +1,12 @@
 const express = require('express');
 const { VehiclesController } = require("../controllers");
-const { isAuthorized } = require("../middlewares");
 
 const route = express.Router();
 const controller = new VehiclesController();
 
-route.get("/:id", isAuthorized, (req, res, next) => {
+route.get("/:id", (req, res, next) => {
+    require("../middlewares").isAuthorized(req, res, next);
+}, (req, res, next) => {
     controller.get(req, res, next);
 });
 

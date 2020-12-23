@@ -6,15 +6,19 @@ const express = require("express");
 const routes = require("./routes");
 const middlewares = require("./middlewares");
 
-const app = express();
+const initialize = () => {
+    const app = express();
+    
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json({ strict: false }));
+    
+    app.use("/", routes);
+    
+    app.use(middlewares.notFound);
+    app.use(middlewares.errorHandler);
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json({ strict: false }));
+    return app;
+}
 
-app.use("/", routes);
-
-app.use(middlewares.notFound);
-app.use(middlewares.errorHandler);
-
-module.exports.handler = serverless(app);
-module.exports.app = app;
+module.exports.handler = serverless(initialize());
+module.exports.initialize = initialize;

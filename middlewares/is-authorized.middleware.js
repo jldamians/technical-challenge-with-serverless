@@ -1,6 +1,6 @@
 'use strict';
 
-const { 
+const {
     WrongCredentials, 
     CredentialsNotEntered, 
 } = require("../errors");
@@ -23,7 +23,7 @@ module.exports = async (req, res, next) => {
     }
 
     const auth = authorization.split(" ")[1];
-    const basic = new Buffer(auth, "base64").toString();
+    const basic = new Buffer.from(auth, "base64").toString();
     const [ email, password ] = basic.split(":");
 
     if (!(email && password)) {
