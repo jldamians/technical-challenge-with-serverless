@@ -3,8 +3,7 @@
 const { assert } = require('chai')
 
 const { 
-    FoundUserRepository,
-    NotFoundUserRepository,
+    FakeUserRepository,
 } = require("../repositories");
 
 const { 
@@ -14,16 +13,16 @@ const {
 
 describe('Probando la búsqueda de usuario', () => {
     it('Debe retornar null si el usuario no es encontrado', async () => {
-        const email = UserEmail('jldamians@gmail.com');
-        const finder = new UserFinder(NotFoundUserRepository);
+        const email = UserEmail('jldamians@unknown.com');
+        const finder = new UserFinder(FakeUserRepository);
         const result = await finder.search(email);
         
         assert.isNull(result);
     });
 
     it('Debe retornar la información del usuario encontrado', async () => {
-        const email = UserEmail('jldamians@gmail.com');
-        const finder = new UserFinder(FoundUserRepository);
+        const email = UserEmail('jldamians@hotmail.com');
+        const finder = new UserFinder(FakeUserRepository);
         const result = await finder.search(email);
         
         assert.isNotNull(result);
