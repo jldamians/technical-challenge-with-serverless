@@ -7,12 +7,7 @@ const database = [{
     names: 'Jose Luis Damian Saavedra',
     password: '$2a$10$RfPRYOECGcOLG23ioRCHd.vj9.H0nJ/hnT.Tfd9wn1xRWHPUbU7Sq',
     facebook: 'https://www.facebook.com/jldamians',
-}, /*{
-    email: 'jadamians@hotmail.com',
-    names: 'Jose Alberto Damian Saavedra',
-    password: '$2a$10$cq/P22Morg07rwIqyiba9u1uNuVMOS/KEnqNbq66whtkjJ5JFuok2',
-    facebook: 'https://www.facebook.com/jadamians',
-}*/];
+},];
 
 const respository = {
     /**

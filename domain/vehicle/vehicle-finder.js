@@ -14,7 +14,7 @@ class VehicleFinder {
         const hasSearchMethod = repository.hasOwnProperty('search');
 
         if (!hasSearchMethod) {
-            throw new Error('La implementación de repositorio de usuario no tiene el método de búsqueda');
+            throw new Error('La implementación de repositorio de vehículo no tiene el método de búsqueda');
         }
     }
 
